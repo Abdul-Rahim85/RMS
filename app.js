@@ -4,7 +4,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const cookieParser = require('cookie-parser');
-const dashboardRoute = require('./routes/index');
+const dashboardRoute = require('./routes/dashboard');
 
 // Add variable from .env
 dotenv.config();
@@ -30,7 +30,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // ===== Routes =====
-app.use('/', dashboardRoute);
+app.use('/dashboard', dashboardRoute);
 
 // ===== Running the server =====
 const PORT = process.env.PORT || 5000;

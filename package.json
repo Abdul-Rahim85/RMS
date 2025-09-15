@@ -15,6 +15,7 @@
   "author": "Abdulrahim Muhammad",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^5.3.8",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.2",
     "ejs": "^3.1.10",
