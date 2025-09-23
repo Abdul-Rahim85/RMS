@@ -24,12 +24,16 @@ app.use([
   express.static(path.join(__dirname, 'public')),
   cookieParser()
 ]);
+app.use('/icons', express.static(__dirname + '/node_modules/bootstrap-icons/font'));
 
 // App View Engine Setup
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // ===== Routes =====
+app.get('/', (req, res) => {
+  res.redirect('/dashboard');
+});
 app.use('/dashboard', dashboardRoute);
 
 // ===== Running the server =====
