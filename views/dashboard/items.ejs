@@ -1,7 +1,7 @@
 <html lang="ar" dir="rtl">
   <%- include('../layouts/head.ejs') %>
   <body class="bg-light">
-    <div class="d-flex">
+    <div class="d-flex flex-shrink-0">
       <!-- Sidebar -->
       <div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white" style="width: 220px; height: 100vh;">
         <a href="/" class="d-flex align-items-center mx-auto text-white text-decoration-none">
@@ -27,10 +27,97 @@
           <a href="#" class="btn btn-outline-light w-100">تسجيل الخروج</a>
         </div>
       </div>
+
+      <!-- Main Content -->
+      <main class="flex-grow-1 bg-light p-5">
+        <header class="d-flex justify-content-between align-content-center">
+          <h3 class="">إدارة الاصناف</h3>
+          <button class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#addItemModal"><span class="fw-bold"> + </span>إضافة صنف </button>
+        </header>
+
+        <div class="container bg-white mt-5 p-2 rounded shadow-sm">
+          <!-- Items table -->
+          <div class="row"> <!-- Table Header -->
+            <div class="col-2 fw-bold fs-5">الترقيم</div>
+            <div class="col-2 fw-bold fs-5">الإسم</div>
+            <div class="col-2 fw-bold fs-5">الصنف</div>
+            <div class="col-2 fw-bold fs-5">السعر</div>
+            <div class="col-2 fw-bold fs-5">الصورة</div>
+            <div class="col-2 fw-bold fs-5">الإجراءات</div>
+          </div>
+          <hr>
+
+          <div class="row"> <!-- Table Row -->
+            <div class="col-2">1</div>
+            <div class="col-2">بيرقر بقري</div>
+            <div class="col-2">ماكولات</div>
+            <div class="col-2">4500 ج.س</div>
+            <div class="col-2">
+              <img src="../../image/burger.png" class="h-75 w-25" alt="burger">
+            </div>
+            <div class="col-2">
+              <button class="btn btn-sm btn-warning">تعديل</button>
+              <button class="btn btn-sm btn-danger">حذف</button>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </main>
     </div>
 
+    <!-- Add Item Modal -->
+    <!-- pop up -->
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      
+      <!-- modal header -->
+      <div class="modal-header">
+        <h5 class="modal-title flex-grow-1">إضافة صنف جديد</h5>
+        <button type="button" class="btn-close flex-shrink-1" data-bs-dismiss="modal" aria-label="close"></button>
+      </div>
 
+      <!-- Modal body -->
+      <form id="addItemForm">
+        <div class="modal-body">
+          <!-- Item name -->
+          <div class="mb-3">
+            <label class="form-label">اسم الصنف</label>
+            <input type="text" name="name" class="form-control" required>
+          </div>
 
+          <!-- Price -->
+          <div class="mb-3">
+            <label class="form-label">السعر</label>
+            <input type="number" name="price" min="0" max="1000000" class="form-control" required>
+          </div>
+
+          <!-- Category -->
+          <div class="mb-3">
+            <label class="form-label">التصنيف</label>
+            <select name="category" class="form-select">
+              <option value="meals">وجبات</option>
+              <option value="drinks">مشروبات</option>
+              <option value="desserts">حلويات</option>
+            </select>
+          </div>
+
+          <!-- Image Upload -->
+          <div class="mb-3">
+            <label class="form-label">صورة (اختياري)</label>
+            <input type="file" name="image" class="form-control" accept="image/*">
+            <div class="form-text">يمكنك رفع صورة للصنف، أو تركه فارغًا.</div>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary w-100">حفظ الصنف</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
     <!-- Bootstrap JS -->
     <script src="../../js/bootstrap.bundle.min.js"></script>
