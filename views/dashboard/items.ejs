@@ -78,24 +78,24 @@
       </div>
 
       <!-- Modal body -->
-      <form id="addItemForm">
+      <form id="addItemForm" enctype="multipart/form-data" method="post">
         <div class="modal-body">
           <!-- Item name -->
           <div class="mb-3">
             <label class="form-label">اسم الصنف</label>
-            <input type="text" name="name" class="form-control" required>
+            <input type="text" name="itemName" class="form-control" required>
           </div>
 
           <!-- Price -->
           <div class="mb-3">
             <label class="form-label">السعر</label>
-            <input type="number" name="price" min="0" max="1000000" class="form-control" required>
+            <input type="number" name="itemPrice" min="0" max="1000000" class="form-control" required>
           </div>
 
           <!-- Category -->
           <div class="mb-3">
             <label class="form-label">التصنيف</label>
-            <select name="category" class="form-select">
+            <select name="itemCategory" class="form-select">
               <option value="meals">وجبات</option>
               <option value="drinks">مشروبات</option>
               <option value="desserts">حلويات</option>
@@ -105,7 +105,7 @@
           <!-- Image Upload -->
           <div class="mb-3">
             <label class="form-label">صورة (اختياري)</label>
-            <input type="file" name="image" class="form-control" accept="image/*">
+            <input type="file" name="itemImage" class="form-control" accept="image/*">
             <div class="form-text">يمكنك رفع صورة للصنف، أو تركه فارغًا.</div>
           </div>
         </div>
@@ -120,7 +120,7 @@
 </div>
 
     <!-- Bootstrap JS -->
-    <script src="../../js/bootstrap.bundle.min.js"></script>
-    <script src="../../js/sidebar.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 </html>

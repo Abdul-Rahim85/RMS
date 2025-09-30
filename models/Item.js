@@ -6,13 +6,12 @@ const itemSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  image: {
+  imageUrl: {
     type: String, // you can store image URL or filename
     default: ""
   },
   category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category", // reference to Category collection
+    type: String,
     required: true
   },
   price: {
