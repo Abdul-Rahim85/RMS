@@ -1,6 +1,26 @@
+html, body {
+  overflow-x: hidden;
+}
+
+
 .w-10 {
   width: 10% !important;
 }
 .h-10 {
   height: 10% !important;
+}
+
+.btn-gray {
+  background-color: #bbbcbd;
+  color: #e9e9e9;
+}
+
+.btn-gray:hover{
+  background-color: #5a6268;
+  color: white;
+}
+
+.my-scroll {
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE/Edge old */
 }

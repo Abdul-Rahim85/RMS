@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
   <%- include('../layouts/head.ejs') %>
-  <body class="bg-light">
+  <body class="bg-light" style="width: 100vw; max-width: 100vw; height: 100vh;">
     <div class="d-flex">
       <!-- Sidebar -->
-      <div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white" style="width: 220px; height: 100vh;">
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white" style="width: 15%; height: 100vh;">
         <a href="/" class="d-flex align-items-center mx-auto text-white text-decoration-none">
           <span class="fs-4">نظام مبيعات</span>
         </a>
@@ -30,66 +30,236 @@
   </div>
 
   <!-- Main Content -->
-  <div class="flex-grow-1 p-4">
+  <div class="flex-grow-1 p-4" style="width: 85%; max-width: 85%; height: 100vh;">
     <div class="row">
       <!-- Left section: items -->
-      <div class="col-lg-8">
-        <div class="row g-3">
-          <!-- Card 1 -->
-          <div class="col-3">
-            <div class="card text-center p-2 shadow-sm">
-              <img src="../../image/burger.png" class="card-img-top w-50 mx-auto" alt="beef burger">
-              <div class="card-body">
-                <h6 class="card-title">بيرقر بقري</h6>
-                <p>7000 ج.س</p>
+      <div class="col-lg-9 p-2">
+        <div class="container">
+          <h4 class="lead fw-bold">المأكولات</h4>
+          <div class="d-flex align-items-center">
+            <button class="btn btn-gray d-flex justify-content-center align-items-center" style="width: 20px; height: 100px;" onclick="scrollRow('meals', 400)">
+              <i class="bi bi-chevron-right fs-4"></i>
+            </button>
+            <div id="meals" class="d-flex overflow-auto flex-nowrap overflow-auto my-scroll">
+              <!-- Item cards -->
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/burger.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">برقر بقري</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
               </div>
-            </div>
-          </div>
-          <!-- Card 2 -->
-          <div class="col-3">
-            <div class="card text-center p-2 shadow-sm">
-              <img src="../../image/pizza.png" class="card-img-top w-50 mx-auto" alt="Chicken Burger">
-              <div class="card-body">
-                <h6 class="card-title">بيتزا</h6>
-                <p>8000 ج.س</p>
+              <!-- more items -->
+
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/pizza.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">بيتزا</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
               </div>
-            </div>
-          </div>
-          <!-- Add more items here -->
 
-          <!-- Card 1 -->
-          <div class="col-3">
-            <div class="card text-center p-2 shadow-sm">
-              <img src="../../image/burger.png" class="card-img-top w-50 mx-auto" alt="beef burger">
-              <div class="card-body">
-                <h6 class="card-title">بيرقر بقري</h6>
-                <p>7000 ج.س</p>
+              <!-- Item cards -->
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/soda.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">صودا</h5>
+                  <p class="card-text">2500 ج.س</p>
+                </div>
               </div>
-            </div>
-          </div>
-          <!-- Card 2 -->
-          <div class="col-3">
-            <div class="card text-center p-2 shadow-sm">
-              <img src="../../image/pizza.png" class="card-img-top w-50 mx-auto" alt="Chicken Burger">
-              <div class="card-body">
-                <h6 class="card-title">بيتزا</h6>
-                <p>8000 ج.س</p>
+              <!-- more items -->
+
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/burger.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">برقر بقري</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
               </div>
+              <!-- more items -->
+
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/pizza.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">بيتزا</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
+              </div>
+
+              <!-- Item cards -->
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/soda.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">صودا</h5>
+                  <p class="card-text">2500 ج.س</p>
+                </div>
+              </div>
+              <!-- more items -->
+
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/burger.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">برقر بقري</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
+              </div>
+              <!-- more items -->
+
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/pizza.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">بيتزا</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
+              </div>
+
+              <!-- Item cards -->
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/soda.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">صودا</h5>
+                  <p class="card-text">2500 ج.س</p>
+                </div>
+              </div>
+              <!-- more items -->
+
+              <!-- Item cards -->
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/soda.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">صودا</h5>
+                  <p class="card-text">2500 ج.س</p>
+                </div>
+              </div>
+              <!-- more items -->
+
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/burger.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">برقر بقري</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
+              </div>
+              <!-- more items -->
+
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/pizza.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">بيتزا</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
+              </div>
+
+              <!-- Item cards -->
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/soda.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">صودا</h5>
+                  <p class="card-text">2500 ج.س</p>
+                </div>
+              </div>
+              <!-- more items -->
+
             </div>
+            <button class="btn btn-gray ms-2 d-flex justify-content-center align-items-center" style="width: 20px; height: 100px;" onclick="scrollRow('meals', -401)">
+              <i class="bi bi-chevron-left fs-4"></i>
+            </button>
           </div>
+        </div>
+        
+        <hr>
+        <div class="container">
+          <h4 class="lead fw-bold">المشروبات</h4>
+          <div class="d-flex align-items-center">
+            <button class="btn btn-gray d-flex justify-content-center align-items-center" style="width: 20px; height: 100px;" onclick="scrollRow('drinks', 400)">
+              <i class="bi bi-chevron-right fs-4"></i>
+            </button>
+            <div id="drinks" class="d-flex overflow-auto flex-nowrap overflow-auto my-scroll">
+            <!-- Item cards -->
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/burger.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">برقر بقري</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
+              </div>
+              <!-- more items -->
 
-          
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/burger.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">برقر بقري</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
+              </div>
+              <!-- more items -->
 
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/burger.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">برقر بقري</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
+              </div>
+              <!-- more items -->
 
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/burger.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">برقر بقري</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
+              </div>
+              <!-- more items -->
 
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/burger.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">برقر بقري</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
+              </div>
+              <!-- more items -->
+
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/burger.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">برقر بقري</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
+              </div>
+              <!-- more items -->
+
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/burger.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">برقر بقري</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
+              </div>
+              <!-- more items -->
+
+              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
+                <img src="/image/burger.png" class="card-img-top w-50 mx-auto mt-2">
+                <div class="card-body text-center">
+                  <h5 class="card-title">برقر بقري</h5>
+                  <p class="card-text">7000 ج.س</p>
+                </div>
+              </div>
+              <!-- more items -->
+              </div>
+            <button class="btn btn-gray ms-2 d-flex justify-content-center align-items-center" style="width: 20px; height: 100px;" onclick="scrollRow('drinks', -401)">
+              <i class="bi bi-chevron-left fs-4"></i>
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- Right section: order + reports -->
-      <div class="col-lg-4">
+      <div class="col-3">
         <div class="card mb-3 shadow-sm">
           <div class="card-body">
-            <h5 class="card-title">Order</h5>
+            <h5 class="card-title">الطلب</h5>
             <ul class="list-group mb-3">
               <li class="list-group-item d-flex justify-content-between">Cheese Sandwich x1 <span>$5</span></li>
               <li class="list-group-item d-flex justify-content-between">Hamburger x1 <span>$8</span></li>
@@ -115,7 +285,7 @@
     </div>
   </div>
 </div>
-
+  
 <!-- Bootstrap JS -->
     <script src="./js/bootstrap.bundle.min.js"></script>
     <script src="./js/main.js"></script>

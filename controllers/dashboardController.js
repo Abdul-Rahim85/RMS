@@ -1,16 +1,25 @@
 const Item = require('../models/Item');
 
-const dashboard_get = (req, res) => {
-  res.render('dashboard/index', { title: 'Dashboard' });
+// Dashboard Controller
+const dashboard_get = async (req, res) => {
+  try {
+    const items = await Item.find();      
+    res.render('dashboard/index', { title: 'Dashboard', items });
+              
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 }
 
+// Items Controller
 const items_get = (req, res) => {
   res.render('dashboard/items', { title: 'Items' });
 }
 
+// Handle item addition
 const items_post = (req, res) => {    
   try {
-
+    // Validate input
     const { itemName, itemCategory, itemPrice } = req.body;
     if (!itemName || !itemCategory || !itemPrice) {
       return res.status(400).json({ error: 'Please fill all required fields' });
@@ -20,7 +29,7 @@ const items_post = (req, res) => {
         name: itemName,
         category: itemCategory,
         price: itemPrice,
-        imageUrl: req.file ? "/uploads/" + req.file.filename : null
+        imageUrl: req.file ? "/image/itemsimage/" + req.file.filename : null
 
       });
       newItem.save();
@@ -33,10 +42,12 @@ const items_post = (req, res) => {
   }
 }
 
+// Reports Controller
 const reports_get = (req, res) => {
   res.render('dashboard/reports', { title: 'Reports' });
 }
 
+// Settings Controller
 const settings_get = (req, res) => {
   res.render('dashboard/settings', { title: 'Settings' });
 }
