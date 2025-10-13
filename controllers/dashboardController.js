@@ -3,8 +3,12 @@ const Item = require('../models/Item');
 // Dashboard Controller
 const dashboard_get = async (req, res) => {
   try {
-    const items = await Item.find();      
-    res.render('dashboard/index', { title: 'Dashboard', items });
+    // Fetch items categorized
+    const meals = await Item.find({ category: "meals" });
+    const drinks = await Item.find({ category: "drinks" });
+    const desserts = await Item.find({ category: "desserts" });
+
+    res.render('dashboard/index', { title: 'Dashboard', meals, drinks, desserts });
               
   } catch (err) {
     res.status(500).json({ error: err.message });

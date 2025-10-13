@@ -24,3 +24,32 @@ html, body {
   scrollbar-width: none;       /* Firefox */
   -ms-overflow-style: none;    /* IE/Edge old */
 }
+
+.btn-primary {
+  background-color: #3B82F6 !important;
+  border-color: #3B82F6 !important;
+}
+
+.btn-primary:hover {
+  background-color: #2563EB !important; /* slightly darker for hover */
+  border-color: #2563EB !important;
+} 
+.btn-primary:focus, .btn-primary.focus {
+  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.5) !important;
+}
+
+/* Make the items interactive */
+.menu-item {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.menu-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.menu-item:active {
+  transform: scale(0.98);
+  background-color: #f8f9fa; /* Bootstrap light gray */
+}
