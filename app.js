@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
+const escpos = require('escpos');
+escpos.USB = require('escpos-usb');
 const cookieParser = require('cookie-parser');
 const dashboardRoute = require('./routes/dashboard');
 
