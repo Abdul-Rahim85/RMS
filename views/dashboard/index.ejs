@@ -14,7 +14,7 @@
             <a href="/dashboard" class="nav-link text-white">لوحة التحكم</a>
           </li>
           <li>
-            <a href="/dashboard/items" class="nav-link text-white">إدارة الاصناف</a>
+            <a href="/items" class="nav-link text-white">إدارة الاصناف</a>
           </li>
           <li>
             <a href="/dashboard/reports" class="nav-link text-white">التقارير</a>
@@ -25,7 +25,7 @@
         </ul>
         <hr>
     <div>
-      <a href="#" class="btn btn-outline-light w-100">تسجيل الخروج</a>
+      <a href="/logout" class="btn btn-outline-light w-100">تسجيل الخروج</a>
     </div>
   </div>
 
@@ -151,15 +151,15 @@
       <!-- Left section: order + reports -->
       <div class="col-3 pt-5" style="height: 100vh; max-height: 100vh";>
         <div class="card mb-3 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">الطلب</h5>
-            <ul id="receiptList" class="list-group mb-3 p-0 receipt"></ul> 
+          <div class="card-body p-0">
+            <h5 class="card-title bg-primary text-white py-2 px-3 rounded-top">الطلب</h5>
+            <ul id="receiptList" class="list-group mb-3 px-3 receipt"></ul> 
 
             <!-- total price -->
-            <div class="d-flex justify-content-between"><strong>المجموع الكلي:</strong><strong id="totalAmount"></strong></div>
+            <div class="d-flex justify-content-between px-3"><strong>المجموع الكلي:</strong><strong id="totalAmount"></strong></div>
 
             <!-- order opretion buttons -->
-            <div class="mt-3">
+            <div class="my-3 px-3">
               <button id="printBtn" class="btn btn-success" disabled onclick="printReceipt()">طباعة</button>
               <button id="deleteBtn" class="btn btn-danger" disabled onclick="clearReceipt()">حذف</button>
             </div>
@@ -170,10 +170,19 @@
 
         <div class="card shadow-sm">
           <div class="card-body p-0">
-            <h5 class="card-title bg-primary text-white py-2 px-3 rounded-top">التقارير</h5>
-              <p id="allItems" class="d-flex justify-content-between mb-0 px-3"><span>محموع الاصناف :</span><span>2000</span></p>
-              <p id="allItems" class="d-flex justify-content-between mb-0 px-3"><span>الاكثر مبيعا:</span><span>2000</span></p>
-              <p id="allItems" class="d-flex justify-content-between px-3"><span>مجموع المبيعات:</span><span>2000</span></p>
+            <h5 class="card-title bg-primary text-white py-2 px-3 rounded-top">التقرير اليومي</h5>
+              <p id="allItems" class="d-flex justify-content-between px-3">
+                <span>محموع الاصناف :</span>
+                <span id="totalItemsSold"><%= reports.totalItemsSold %></span>
+              </p>
+              <p id="allItems" class="d-flex justify-content-between px-3">
+                <span>الاكثر مبيعا:</span>
+                <span id="bestSellingItem"><%= reports.bestSellingItem %></span>
+              </p>
+              <p id="allItems" class="d-flex justify-content-between px-3">
+                <span>مجموع المبيعات:</span>
+                <span id="totalSales"><%= reports.totalSales %></span>
+              </p>
 
           </div>
         </div>
@@ -187,15 +196,3 @@
     <script src="./js/main.js"></script>
   </body>
 </html>
-<!-- 
-
-//Item cards 
-              <div class="card m-2 flex-shrink-0" style="min-width: 150px; max-width: 150px;">
-                <img src="/image/burger.png" class="card-img-top w-50 mx-auto mt-2">
-                <div class="card-body text-center">
-                  <h5 class="card-title">برقر بقري</h5>
-                  <p class="card-text">7000 ج.س</p>
-                </div>
-              </div>
-
--->

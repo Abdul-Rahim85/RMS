@@ -19,27 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Send a POST request to add an item to the database
-document.getElementById("addItemForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const form = e.target;
-  
-  const formData = new FormData(form); // Collect form data including files  
-
-  const response = await fetch(window.location.href, {
-    method: "POST",
-    body: formData
-  });
-
-  if (response.ok) {
-    alert("تم حفظ الصنف بنجاح 🎉");
-    form.reset();
-    bootstrap.Modal.getInstance(document.getElementById("addItemModal")).hide();
-  } else {
-    alert("حدث خطأ أثناء الحفظ 😢");
-  }
-});
 
 // Function to scroll the item rows
 function scrollRow(rowId, distance) {
@@ -128,6 +107,17 @@ async function printReceipt() {
 
     if (response.ok) {
       clearReceipt();
+      const { totalItemsSold, totalSales, bestSellingItem } = (await response.json()).reports;
+
+      // Update reports section if present
+      const totalItemsSoldElement = document.getElementById('totalItemsSold');
+      const totalSalesElement = document.getElementById('totalSales');
+      const bestSellingItemElement = document.getElementById('bestSellingItem');
+
+      // Update the DOM elements with new report data
+      if(totalItemsSoldElement) totalItemsSoldElement.textContent = totalItemsSold;
+      if(totalSalesElement) totalSalesElement.textContent = totalSales + ' ج.س';
+      if(bestSellingItemElement) bestSellingItemElement.textContent = bestSellingItem;      
     } else {
       let errorData = await response.json();
       console.log('====================================');
@@ -137,8 +127,3 @@ async function printReceipt() {
   }
   
 }
-// Function to finalize the order
-
-// Button references
-
-

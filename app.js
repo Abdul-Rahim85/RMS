@@ -7,6 +7,8 @@ const escpos = require('escpos');
 escpos.USB = require('escpos-usb');
 const cookieParser = require('cookie-parser');
 const dashboardRoute = require('./routes/dashboard');
+const itemsRoute = require('./routes/item');
+const authController = require('./controllers/authController');
 
 // Add variable from .env
 dotenv.config();
@@ -34,9 +36,16 @@ app.set('views', path.join(__dirname, 'views'));
 
 // ===== Routes =====
 app.get('/', (req, res) => {
-  res.redirect('/dashboard');
+  res.redirect('/login');
 });
+
+// Auth Routes
+app.get('/login', authController.login_get);
+app.post('/login', authController.login_post);
+app.get('/logout', authController.logout_get);
+
 app.use('/dashboard', dashboardRoute);
+app.use('/items', itemsRoute);
 
 // ===== Running the server =====
 const PORT = process.env.PORT || 5000;

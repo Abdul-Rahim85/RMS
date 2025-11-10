@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <%- include('../layouts/head.ejs') %>
+  <body class="bg-light" style="width: 100vw; max-width: 100vw; height: 100vh;">
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100%;">
+      <div class="card shadow-sm" style="width: 400px;">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4">تسجيل الدخول</h3>
+          <form id="loginForm"> 
+            <div class="mb-3">
+              <label for="username" class="form-label">اسم المستخدم</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">كلمة المرور</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">تسجيل الدخول</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>

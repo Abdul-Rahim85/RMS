@@ -54,24 +54,3 @@ html, body {
   background-color: #f8f9fa; /* Bootstrap light gray */
 }
 
-/* Receipt printing styles */
-@media print {
-  body {
-    width: 80mm !important; /* or 58mm depending on printer */
-    margin: 0 !important;
-    padding: 0 !important;
-    font-family: "Arial", sans-serif !important;
-    font-size: 12px !important;
-    background-color: #2563EB !important;
-  }
-
-  #receiptList {
-    width: 100% !important;
-    text-align: right !important;
-    background-color: #2563EB !important;
-  }
-
-  button {
-    display: none !important; /* hide buttons during print */
-  }
-}
