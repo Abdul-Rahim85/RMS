@@ -35,7 +35,10 @@
           <button class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#addItemModal"><span class="fw-bold"> + </span>إضافة صنف </button>
         </header>
 
-        <div class="container overflow-y-auto overflow-x-hidden bg-white mt-3 p-2 rounded shadow-sm" style="height: 90%; overflow-y: overlay;">
+        <div
+            id="itemsList"
+            class="container overflow-y-auto overflow-x-hidden bg-white mt-3 p-2 rounded shadow-sm" 
+            style="height: 90%; overflow-y: overlay;">
           <!-- Items table -->
           <div class="row"> <!-- Table Header -->
             <div class="col-2 fw-bold fs-5">الترقيم</div>
@@ -49,7 +52,7 @@
 
           <% let index = 1 %>
           <% items.forEach((item) => { %>
-          <div class="row"> <!-- Table Row -->
+          <div id="itemContainer" class="row d-flex align-items-center py-2" data-itemid="<%= item._id %>"> <!-- Table Row -->
             <div class="col-2"><%= index %></div>
             <div class="col-2"><%= item.name %></div>
             <div class="col-2"><%= item.category %></div>
@@ -58,17 +61,16 @@
               <img src="<%= item.imageUrl %>" class="h-100 w-25" alt="burger">
             </div>
             <div class="col-2">
-              <button class="btn btn-sm btn-warning">
+              <button class="btn btn-sm btn-warning editItem">
                 تعديل
                 <i class="bi bi-pencil-square"></i>
               </button>
-              <button class="btn btn-sm btn-danger">
+              <button class="btn btn-sm btn-danger deleteItem">
                 حذف
                 <i class="bi bi-trash-fill"></i>
               </button>
             </div>
           </div>
-          <hr>
           <% index++; %>
           <% }); %>
         </div>
@@ -129,8 +131,10 @@
   </div>
 </div>
 
+    <div id="statusMessage" class="status-message"></div>
     <!-- Bootstrap JS -->
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/js/item.js"></script>
   </body>
 </html>
