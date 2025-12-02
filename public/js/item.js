@@ -18,6 +18,13 @@ itemsList.addEventListener("click", async function (event) {
     } else {
       console.error("Failed to delete item");
     }
+
+  } else if (event.target.classList.contains("btn-warning")) {
+    // Handle edit button click (to be implemented)
+    console.log(event.target);
+    
+  } else {
+    return; // Do nothing if other areas are clicked
   }
 });
 
@@ -66,15 +73,23 @@ addItemForm.addEventListener("submit", async (e) => {
     // Append the new item to the items list
     const item = newItem.item;
     const itemHtml = `
-      <div class="row align-items-center mb-3" data-itemid="${item._id}">
+      <div id="itemContainer" class="row d-flex align-items-center py-2" data-itemid="${item._id}">
+        <div class="col-2">${itemsList.children.length === 2 ? 1 : itemsList.children.length-1}</div>
+        <div class="col-md-2">${item.name}</div>
+        <div class="col-md-2">${item.category}</div>
+        <div class="col-md-2">${item.price.toFixed(2)} ج.س</div>
         <div class="col-md-2">  
-          ${item.imageUrl ? `<img src="${item.imageUrl}" alt="${item.name}" class="img-fluid">` : 'No Image'}
+          ${item.imageUrl ? `<img src="${item.imageUrl}" alt="${item.name}" class="h-100 w-25">` : 'No Image'}
         </div>
-        <div class="col-md-3">${item.name}</div>
-        <div class="col-md-3">${item.category}</div>
-        <div class="col-md-2">${item.price.toFixed(2)} ر.س</div>
-        <div class="col-md-2">
-          <button class="btn btn-danger btn-sm">حذف</button>
+        <div class="col-2">
+          <button class="btn btn-sm btn-warning editItem" data-bs-target="#itemModal" data-bs-toggle="modal">
+            تعديل
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button class="btn btn-sm btn-danger deleteItem">
+            حذف
+            <i class="bi bi-trash-fill"></i>
+          </button>
         </div>
       </div>
     `;

@@ -32,7 +32,7 @@
       <main class="flex-grow-1 overflow-hidden bg-light py-3 px-5" style="height: 100vh;">
         <header class="d-flex justify-content-between align-content-center" style="height: 6%;">
           <h3 class="">إدارة الاصناف</h3>
-          <button class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#addItemModal"><span class="fw-bold"> + </span>إضافة صنف </button>
+          <button class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#itemModal"><span class="fw-bold"> + </span>إضافة صنف </button>
         </header>
 
         <div
@@ -56,12 +56,12 @@
             <div class="col-2"><%= index %></div>
             <div class="col-2"><%= item.name %></div>
             <div class="col-2"><%= item.category %></div>
-            <div class="col-2"><%= item.price %> ج.س</div>
+            <div class="col-2"><%= item.price.toFixed(2) %> ج.س</div>
             <div class="col-2">
-              <img src="<%= item.imageUrl %>" class="h-100 w-25" alt="burger">
+              <img src="<%= item.imageUrl %>" class="h-100 w-25" alt="item image"/>
             </div>
             <div class="col-2">
-              <button class="btn btn-sm btn-warning editItem">
+              <button class="btn btn-sm btn-warning editItem" data-bs-target="#itemModal" data-bs-toggle="modal">
                 تعديل
                 <i class="bi bi-pencil-square"></i>
               </button>
@@ -79,13 +79,13 @@
 
     <!-- Add Item Modal -->
     <!-- pop up -->
-<div class="modal fade" id="addItemModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="itemModal" role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       
       <!-- modal header -->
       <div class="modal-header">
-        <h5 class="modal-title flex-grow-1">إضافة صنف جديد</h5>
+        <h5 id="myModalLabel" class="modal-title flex-grow-1">إضافة صنف جديد</h5>
         <button type="button" class="btn-close flex-shrink-1" data-bs-dismiss="modal" aria-label="close"></button>
       </div>
 
