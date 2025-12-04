@@ -1,4 +1,4 @@
-const addItemForm = document.getElementById('addItemForm');
+const itemForm = document.getElementById('itemForm');
 const itemsList = document.getElementById('itemsList')
 
 itemsList.addEventListener("click", async function (event) {
@@ -19,9 +19,43 @@ itemsList.addEventListener("click", async function (event) {
       console.error("Failed to delete item");
     }
 
-  } else if (event.target.classList.contains("btn-warning")) {
-    // Handle edit button click (to be implemented)
-    console.log(event.target);
+  } else if (event.target.classList.contains("btn-warning")) {  //Check if edit button is clicked
+    itemForm.reset(); // Clear previous data
+    const itemElement = event.target.closest("div.row"); // Get the item container
+    const itemId = itemElement.dataset.itemid; // Get item ID
+    
+    // Fetch item data from server
+    const response = await fetch(`/items/${itemId}`);
+    if (response.ok) {
+      const data = await response.json();
+      const item = data.item;
+      
+      // Populate the form fields with item data
+      itemForm.itemName.value = item.name;
+      itemForm.itemCategory.value = item.category;
+      itemForm.itemPrice.value = item.price;
+
+      // Change form submission to handle update
+      itemForm.onsubmit = async (e) => {
+        e.preventDefault(); 
+        const form = e.target;
+        const formData = new FormData(form); // Collect form data including files
+        const updateResponse = await fetch(`/items/${itemId}`, {
+          method: "PATCH",
+          body: formData
+        }); 
+        if (updateResponse.ok) {
+          showMessage("تم التعديل بنجاح ✔︎", "success");
+          form.reset();
+          bootstrap.Modal.getInstance(document.getElementById("itemModal")).hide();
+          // Optionally, update the item in the items list on the page
+        } else {
+          showMessage("حدث خطأ أثناء التعديل ❌", "error");
+        }
+      };
+    } else {
+      // console.error("Failed to fetch item data");
+    }
     
   } else {
     return; // Do nothing if other areas are clicked
@@ -53,7 +87,7 @@ function showMessage(text, type) {
 
 
 // Send a POST request to add an item to the database
-addItemForm.addEventListener("submit", async (e) => {
+itemForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const form = e.target;
@@ -68,7 +102,7 @@ addItemForm.addEventListener("submit", async (e) => {
   if (response.ok) {
     showMessage("تم الحفظ بنجاح ✔︎", "success");
     form.reset();
-    bootstrap.Modal.getInstance(document.getElementById("addItemModal")).hide();
+    bootstrap.Modal.getInstance(document.getElementById("itemModal")).hide();
     const newItem = await response.json();
     // Append the new item to the items list
     const item = newItem.item;
