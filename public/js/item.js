@@ -1,8 +1,12 @@
+// Handle item form submission for adding and editing items
 const itemForm = document.getElementById('itemForm');
-const itemsList = document.getElementById('itemsList')
+const itemsList = document.getElementById('itemsList');
+// to track if we are in edit mode
+let isEditMode = false;
+let editItemId = null;
 
-itemsList.addEventListener("click", async function (event) {
-  
+
+itemsList.addEventListener("click", async function (event) {  
   // Check if the clicked element is a delete button
   if (event.target.classList.contains("btn-danger")) {
 
@@ -20,13 +24,13 @@ itemsList.addEventListener("click", async function (event) {
     }
 
   } else if (event.target.classList.contains("btn-warning")) {  //Check if edit button is clicked
-    itemForm.reset(); // Clear previous data
+    isEditMode = true; // Set edit mode
     const itemElement = event.target.closest("div.row"); // Get the item container
-    const itemId = itemElement.dataset.itemid; // Get item ID
+    editItemId = itemElement.dataset.itemid; // Get item ID    
+
+    const response = await fetch(`/items/${editItemId}`); // Fetch item data
     
-    // Fetch item data from server
-    const response = await fetch(`/items/${itemId}`);
-    if (response.ok) {
+    if (response.ok) {      
       const data = await response.json();
       const item = data.item;
       
@@ -34,30 +38,11 @@ itemsList.addEventListener("click", async function (event) {
       itemForm.itemName.value = item.name;
       itemForm.itemCategory.value = item.category;
       itemForm.itemPrice.value = item.price;
-
-      // Change form submission to handle update
-      itemForm.onsubmit = async (e) => {
-        e.preventDefault(); 
-        const form = e.target;
-        const formData = new FormData(form); // Collect form data including files
-        const updateResponse = await fetch(`/items/${itemId}`, {
-          method: "PATCH",
-          body: formData
-        }); 
-        if (updateResponse.ok) {
-          showMessage("تم التعديل بنجاح ✔︎", "success");
-          form.reset();
-          bootstrap.Modal.getInstance(document.getElementById("itemModal")).hide();
-          // Optionally, update the item in the items list on the page
-        } else {
-          showMessage("حدث خطأ أثناء التعديل ❌", "error");
-        }
-      };
     } else {
-      // console.error("Failed to fetch item data");
+      console.error("Failed to fetch item data");
     }
-    
-  } else {
+
+  } else {  
     return; // Do nothing if other areas are clicked
   }
 });
@@ -90,6 +75,26 @@ function showMessage(text, type) {
 itemForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  if (isEditMode) {    
+    // Edit mode is handled in the click event listener
+      const form = e.target;
+      const formData = new FormData(form); // Collect form data including files
+      const updateResponse = await fetch(`/items/${editItemId}`, {
+          method: "PATCH",
+          body: formData
+        }); 
+        if (updateResponse.ok) {
+          showMessage("تم التعديل بنجاح ✔︎", "success");
+          form.reset();
+          bootstrap.Modal.getInstance(document.getElementById("itemModal")).hide();
+          // Optionally, update the item in the items list on the page
+        } else {
+          showMessage("حدث خطأ أثناء التعديل ❌", "error");
+        }
+
+  } else {
+
+  // Add mode starts here
   const form = e.target;
   
   const formData = new FormData(form); // Collect form data including files  
@@ -132,4 +137,12 @@ itemForm.addEventListener("submit", async (e) => {
   } else {
     showMessage("حدث خطأ أثناء الحفظ ❌", "error");
   }
+}
+
+// reset form
+itemForm.reset();
+// Reset edit mode after submission
+isEditMode = false;
+editItemId = null;
+
 });

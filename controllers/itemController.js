@@ -95,6 +95,7 @@ const item_patch = async (req, res) => {
     item.price = itemPrice || item.price;
     // If new image uploaded, update imageUrl
     if (req.file) {
+      
       // Delete old image if exists 
       if (item.imageUrl) {
         const oldImageFullPath = path.join(__dirname, "../", "public", item.imageUrl);

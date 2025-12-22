@@ -55,7 +55,21 @@
           <div id="itemContainer" class="row d-flex align-items-center py-2" data-itemid="<%= item._id %>"> <!-- Table Row -->
             <div class="col-2"><%= index %></div>
             <div class="col-2"><%= item.name %></div>
-            <div class="col-2"><%= item.category %></div>
+            <div class="col-2">
+              <% switch (item.category) { 
+                  case 'meals': %>
+                  وجبات
+                  <% break; 
+                  case 'drinks': %>
+                  مشروبات
+                  <% break; 
+                  case 'desserts': %>
+                  حلويات
+                  <% break; 
+                  default: %>
+                  غير معروف 
+              <% } %>
+            </div>
             <div class="col-2"><%= item.price.toFixed(2) %> ج.س</div>
             <div class="col-2">
               <img src="<%= item.imageUrl %>" class="h-100 w-25" alt="item image"/>
