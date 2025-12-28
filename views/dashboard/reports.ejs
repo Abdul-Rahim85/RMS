@@ -1,9 +1,9 @@
 <html lang="ar" dir="rtl">
   <%- include('../layouts/head.ejs') %>
-  <body class="bg-light">
-    <div class="d-flex">
+  <body class="bg-light" style="height: 100vh;">
+    <div class="d-flex h-100">
       <!-- Sidebar -->
-      <div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white" style="width: 220px; height: 100vh;">
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white h-100" style="width: 220px;">
         <a href="/" class="d-flex align-items-center mx-auto text-white text-decoration-none">
           <span class="fs-4">نظام مبيعات</span>
         </a>
@@ -16,7 +16,7 @@
             <a href="/items" class="nav-link text-white">إدارة الاصناف</a>
           </li>
           <li>
-            <a href="/dashboard/reports" class="nav-link text-white">التقارير</a>
+            <a href="/reports" class="nav-link text-white">التقارير</a>
           </li>
           <li>
             <a href="/dashboard/settings" class="nav-link text-white">الإعدادات</a>
@@ -29,14 +29,107 @@
       </div>
 
       <!-- Main Content -->
-      <main class="" style="height: 100vh;">
-        <header class="d-flex justify-content-between align-content-center" style="height: 6%;">
+      <main class="w-100 py-3 px-3 h-100">
+        <header class="d-flex justify-content-between align-content-center" style="height: 42px;">
           <h3 class="">📊 التقارير</h3>
+          <!-- Filters -->
+          <div class="d-flex gap-2 w-50 align-items-center text-nowrap">
+            <p class="fw-bold m-0">عرض التقارير:</p>
+            <label for="from" class="">من</label>
+            <input id="from" type="date" class="form-control form-control-sm">
+            <label for="to" class="">إلى</label>
+            <input id="to" type="date" class="form-control form-control-sm">
+            <button class="btn btn-primary btn-sm fw-bold">عرض</button>
+          </div>
         </header>
-      </main>
-    </div>
 
-      
+        <!-- Reports Content -->
+        <section class="mt-3" style="height: calc(100% - 42px);">
+          <!-- Summary Cards -->
+          <div class="container">
+            <div class="row g-2 mb-3">
+            <div class="col-3">
+              <div class="card p-2 text-center stat-card shadow-sm">
+                <small>إجمالي المبيعات</small>
+                <strong><%= totalSales %> ج.س</strong>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="card p-2 text-center stat-card shadow-sm">
+                <small>عدد الطلبات</small>
+                <strong><%= allOrders %></strong>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="card p-2 text-center stat-card shadow-sm">
+                <small>الأكثر مبيعاً</small>
+                <strong><%= bestSellingItem %></strong>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="card p-2 text-center stat-card shadow-sm">
+                <small>متوسط المبيعات</small>
+                <strong><%= averageSales %> ج.س</strong>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <!-- Charts -->
+          <div class="container">
+            <div class="row g-3 mb-3">
+              <div class="col-6">
+                <div class="card p-3 shadow-sm">
+                  <small class="fw-bold">مبيعات اخر 7 أيام</small>
+                  <canvas id="salesChart"><%= dailySales %></canvas>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="card p-3 shadow-sm">
+                  <small class="fw-bold">المبيعات حسب الفئة</small>
+                  <canvas id="salesChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Best Selling Items Table -->
+          <div class="container">
+            <div class="card p-3 pb-0 mb-3 shadow-sm">
+              <small class="fw-bold d-block mb-2">الأصناف الأكثر مبيعاً</small>
+
+              <table class="table table-sm mb-0 text-center">
+                <thead>
+                  <tr>
+                    <th>الصنف</th>
+                    <th>الكمية</th>
+                    <th>الإجمالي</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>عصير</td>
+                    <td>50</td>
+                    <td>5,000 ج.س</td>
+                  </tr>
+                  <tr>
+                    <td>شاي</td>
+                    <td>30</td>
+                    <td>3,000 ج.س</td>
+                  </tr>
+                  <tr>
+                    <td>قهوة</td>
+                    <td>20</td>
+                    <td>2,000 ج.س</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div> 
     <!-- Bootstrap JS -->
     <script src="../../js/bootstrap.bundle.min.js"></script>
     <script src="../../js/main.js"></script>

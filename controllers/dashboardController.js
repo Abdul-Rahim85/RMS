@@ -1,5 +1,6 @@
 const Item = require('../models/Item');
 const Order = require('../models/order');
+const { calculateReports } = require('./calculateReports');
 
 // Dashboard Controller
 const dashboard_get = async (req, res) => {
@@ -9,12 +10,19 @@ const dashboard_get = async (req, res) => {
     const drinks = await Item.find({ category: "drinks" });
     const desserts = await Item.find({ category: "desserts" });
 
+    // Define start and end of the current day
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0); // today at 00:00:00
+
+    const endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999); // today at 23:59:59
+
     // Calculate reports data
-    const { totalItemsSold, totalSales, bestSellingItem } = await calculateReports();
+    const { totalItemsSold, totalSales, bestSellingItem } = await calculateReports(startOfDay, endOfDay);
     
     // Render dashboard with fetched data
     res.render('dashboard/index', 
-      { title: 'Dashboard', 
+      { title: 'لوحة التحكم', 
         meals, 
         drinks, 
         desserts, 
@@ -32,6 +40,13 @@ const dashboard_get = async (req, res) => {
 //This method handel the request of printing the order in the paper printer #######
 const order_print_post = async (req, res) => {
   try {
+    // Define start and end of the current day
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0); // today at 00:00:00
+
+    const endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999); // today at 23:59:59
+
     const { orderItems, total } = req.body;   
     if(!orderItems || !total) {
       return res.status(400).json({ error: 'Invalid order data' });
@@ -44,7 +59,7 @@ const order_print_post = async (req, res) => {
       await newOrder.save();
 
       // Recalculate reports after new order
-      const {totalItemsSold, totalSales, bestSellingItem } = await calculateReports();      
+      const {allOrders, totalItemsSold, totalSales, bestSellingItem } = await calculateReports(startOfDay, endOfDay);      
       res.status(200).json({ message: 'Order received for printing', reports: {
           totalItemsSold, 
           totalSales, 
@@ -58,86 +73,16 @@ const order_print_post = async (req, res) => {
   } 
 }
 
-
-// Reports Controller
-const reports_get = (req, res) => {
-  res.render('dashboard/reports', { title: 'Reports' });
-}
-
 // Settings Controller
 const settings_get = (req, res) => {
-  res.render('dashboard/settings', { title: 'Settings' });
+  res.render('dashboard/settings', { title: 'الإعدادات' });
 }
 
 
 // Helper function to calculate reports
-async function calculateReports() {
-  // Initialize report variables
-  let allItems = [], totalItemsSold = 0, totalSales = 0, bestSellingItem = '';    
-
-  // Define start and end of the current day
-  const startOfDay = new Date();
-  startOfDay.setHours(0, 0, 0, 0); // today at 00:00:00
-
-  const endOfDay = new Date();
-  endOfDay.setHours(23, 59, 59, 999); // today at 23:59:59
-
-
-  // Fetch orders if needed (not used in current view)
-  const orders = await Order.find({
-    createdAt: { $gte: startOfDay, $lte: endOfDay }
-  }).sort({ createdAt: -1 });
-
-  // Cycle through orders to aggregate item quantities 
-  orders.forEach(order => {
-    let oneOrderItems = order.items;
-
-    // Assuming order.items is an array of item references with quantity
-    oneOrderItems.forEach(item => {
-
-      if(allItems.length === 0) {
-        allItems.push({ name: item.name, quantity: item.count});
-        return;
-      }
-      for (let i = 0; i < allItems.length; i++) {
-        if (allItems[i].name === item.name) {
-          allItems[i].quantity += item.count;
-          break;
-
-        } else if (i === allItems.length - 1) {
-          allItems.push({ name: item.name, quantity: item.count});
-          break
-        }
-      }
-    });
-  });
-
-  // Determine best-selling item
-  if(allItems.length > 0){
-    bestSellingItem = allItems.reduce((max, item) => {
-    return item.quantity > max.quantity ? item : max;
-    }, { name: '', quantity: 0 }).name;
-  }
-  
-  // Calculate total items sold and
-  if(allItems.length > 0){
-    totalItemsSold = allItems.reduce((sum, item) => {
-    return sum + item.quantity;
-  }, 0);
-  }
-
-  // Calculate total sales
-  if(orders.length > 0) {
-    totalSales = orders.reduce((sum, order) => {
-    return sum + order.totalAmount;
-  }, 0);
-  }
-  return { totalItemsSold, totalSales, bestSellingItem };
-}
 
 module.exports = {
   dashboard_get,
   order_print_post,
-  reports_get,
   settings_get
 }

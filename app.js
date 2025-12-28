@@ -8,6 +8,7 @@ escpos.USB = require('escpos-usb');
 const cookieParser = require('cookie-parser');
 const dashboardRoute = require('./routes/dashboard');
 const itemsRoute = require('./routes/item');
+const reportsRoute = require('./routes/report');
 const authController = require('./controllers/authController');
 
 // Add variable from .env
@@ -46,6 +47,7 @@ app.get('/logout', authController.logout_get);
 
 app.use('/dashboard', dashboardRoute);
 app.use('/items', itemsRoute);
+app.use('/reports', reportsRoute);
 
 // ===== Running the server =====
 const PORT = process.env.PORT || 5000;

@@ -6,7 +6,7 @@ const Item = require('../models/Item');
 const items_get = async (req, res) => {  
   const itemList = await Item.find();
   
-  res.render('dashboard/items', { title: 'Items', items: itemList });
+  res.render('dashboard/items', { title: 'إدارة الاصناف', items: itemList });
 }
 
 // Get single item by ID
