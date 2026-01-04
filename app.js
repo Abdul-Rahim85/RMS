@@ -30,6 +30,7 @@ app.use([
   cookieParser()
 ]);
 app.use('/icons', express.static(__dirname + '/node_modules/bootstrap-icons/font'));
+app.use('/vendor', express.static(__dirname + '/node_modules/chart.js/dist'));
 
 // App View Engine Setup
 app.set('view engine', 'ejs');

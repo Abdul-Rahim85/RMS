@@ -81,7 +81,7 @@
               <div class="col-6">
                 <div class="card p-3 shadow-sm">
                   <small class="fw-bold">مبيعات اخر 7 أيام</small>
-                  <canvas id="salesChart"><%= dailySales %></canvas>
+                  <canvas id="DailySalesChart"></canvas>
                 </div>
               </div>
 
@@ -130,9 +130,17 @@
         </section>
       </main>
     </div> 
+
+    <!-- Daily Sales Data -->
+    <script id="daily-sales-data" type="application/json">
+      <%- JSON.stringify(dailySales) %>
+    </script>
+    <!-- Chart.js -->
+    <script src="/vendor/chart.umd.js"></script>
     <!-- Bootstrap JS -->
-    <script src="../../js/bootstrap.bundle.min.js"></script>
-    <script src="../../js/main.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/reports.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 </html>
 
