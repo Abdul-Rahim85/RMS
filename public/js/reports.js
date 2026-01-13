@@ -1,5 +1,5 @@
 const dailySales = JSON.parse(
-  document.getElementById("daily-sales-data").textContent
+    document.getElementById("daily-sales-data").textContent
 );
 
 const labels = dailySales.map(item => item.day);

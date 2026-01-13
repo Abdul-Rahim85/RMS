@@ -10,16 +10,14 @@ const reports_get = async (req, res) => {
 
   // Set startday to 7 days ago at 00:00:00 and endday to today at 23:59:59
   startday.setUTCHours(0, 0, 0, 0);
-  startday.setUTCDate(now.getUTCDate() - 7); // 7 days ago
+  startday.setUTCDate(now.getUTCDate() - 6); // 7 days ago
+  
   
   // Set endday to today at 23:59:59
   endday.setUTCDate(now.getUTCDate());    
-  endday.setUTCHours(23, 59, 59, 999);
-
-  console.log(startday);
+  endday.setUTCHours(23, 59, 59, 999);  
   
-  
-  const {allOrders, totalSales, bestSellingItem, averageSales, dailySales } = await calculateReports(startday, endday);
+  const {allOrders, totalSales, bestSellingItem, averageSales, dailySales } = await calculateReports(startday, endday);  
 
   res.render(
     'dashboard/reports',

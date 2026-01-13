@@ -28,16 +28,16 @@ function scrollRow(rowId, distance) {
 }
 
 // Function to add item to receipt
-function addToReceipt(name, price) {
+function addToReceipt(name, price, category) {
   const receiptList = document.getElementById('receiptList');    
   const item = document.createElement('li');
-  const count = 1;
+  const count = 1; // default count is 1 user can increase it later
 
   if(orderItems.length >= 1) {
 
     for(let i = 0; i < receiptList.children.length; i++) {
-      const orderitem = receiptList.children[i];
-      const itemName = orderitem.children[0].textContent;      
+      const orderitem = receiptList.children[i]; // existing item in the receipt
+      const itemName = orderitem.children[0].textContent; // name of existing item
 
       if(itemName === name) {
         // If item already exists, increment its count
@@ -59,7 +59,7 @@ function addToReceipt(name, price) {
         item.className = "list-group-item d-flex justify-content-between align-items-center";
         item.innerHTML = `<span>${name}</span> <span>${count}X</span> <span>${price} ج.س</span>`;
         receiptList.appendChild(item);
-        orderItems.push({ name, price, count });
+        orderItems.push({ name, price, category, count });
         break;
       }
     }} else {
@@ -67,7 +67,7 @@ function addToReceipt(name, price) {
       item.className = "list-group-item d-flex justify-content-between align-items-center";
       item.innerHTML = `<span>${name}</span> <span>${count}X</span> <span>${price} ج.س</span>`;
       receiptList.appendChild(item);
-      orderItems.push({ name, price, count });
+      orderItems.push({ name, price, category, count });
       printBtn.disabled = false;
       deleteBtn.disabled = false;
     }

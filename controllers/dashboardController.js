@@ -8,7 +8,7 @@ const dashboard_get = async (req, res) => {
     // Fetch items categorized
     const meals = await Item.find({ category: "meals" });
     const drinks = await Item.find({ category: "drinks" });
-    const desserts = await Item.find({ category: "desserts" });
+    const desserts = await Item.find({ category: "desserts" });    
 
     // Define start and end of the current day
     const startOfDay = new Date();
@@ -47,7 +47,8 @@ const order_print_post = async (req, res) => {
     const endOfDay = new Date();
     endOfDay.setHours(23, 59, 59, 999); // today at 23:59:59
 
-    const { orderItems, total } = req.body;   
+    const { orderItems, total } = req.body;
+    
     if(!orderItems || !total) {
       return res.status(400).json({ error: 'Invalid order data' });
     } else {

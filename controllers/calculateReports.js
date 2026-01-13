@@ -18,7 +18,7 @@ async function calculateReports(startOfDate, endOfDate) {
   // Fetch orders if needed (not used in current view)
   const orders = await Order.find({
     createdAt: { $gte: startOfDate, $lte: endOfDate }
-  }).sort({ createdAt: -1 });
+  }).sort({ createdAt: -1 });  
 
   // Calculate daily sales
   calcDailySales(orders);
